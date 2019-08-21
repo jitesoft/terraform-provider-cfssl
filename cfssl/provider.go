@@ -3,6 +3,7 @@ package cfssl
 import (
 	"github.com/hashicorp/terraform/helper/schema"
 	"github.com/jitesoft/terraform-provider-cfssl/cfssl/client"
+	"github.com/jitesoft/terraform-provider-cfssl/cfssl/resources"
 	"github.com/jitesoft/terraform-provider-cfssl/cfssl/service"
 )
 
@@ -35,7 +36,10 @@ func Provider() *schema.Provider {
 				},
 			},
 		},
-		ResourcesMap:  {},
+		ResourcesMap: map[string]*schema.Resource{
+			"cfssl_certificate": resources.CertificateResource(),
+			"cfssl_signed_certificate": resources.SignedCertificateResource(),
+		},
 		ConfigureFunc: providerConfig,
 	}
 }
